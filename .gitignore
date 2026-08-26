@@ -4,6 +4,6 @@ __pycache__/
 Backup/
 
 #TestFile
-test_path_ifelse
-test_path_name
-TestInputClass
+/test_path_ifelse.py
+/test_path_name.py
+/TestInputClass.py
