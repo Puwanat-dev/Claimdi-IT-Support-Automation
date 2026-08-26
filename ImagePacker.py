@@ -21,8 +21,13 @@ class ImagePacker:
                 self.relative_path = pic_storage_domain[48:78] 
                 self.folder_name = pic_storage_domain[60:78]
         elif "pic" in domain_check:
-            self.relative_path = pic_storage_domain[45:75] 
-            self.folder_name = pic_storage_domain[57:75]
+            if pic_storage_domain[55] == "/":
+                self.relative_path = pic_storage_domain[45:74] 
+                self.folder_name = pic_storage_domain[56:74]
+            else:
+                self.relative_path = pic_storage_domain[45:75] 
+                self.folder_name = pic_storage_domain[57:75]
+            
         else:
             raise ValueError("Wrong path")  # Raise an error if the prefix is neither "pic" nor "opi"
 
