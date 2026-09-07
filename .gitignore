@@ -1,7 +1,10 @@
 
 __pycache__/
-
 Backup/
+
+#Config 
+.venv/
+/source_base.xlsx
 
 #TestFile
 /test_path_ifelse.py
