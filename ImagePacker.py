@@ -1,17 +1,23 @@
 import os
 import shutil
 import zipfile
+from SpreadsheetConfig import SpreadsheetConfig  # {New}
+
+# {New}
+DEFAULT_SOURCE_BASE_FILE = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "source_base.xlsx"
+)
 
 # --- Class definition --- (ใหม่)
 class ImagePacker: 
     """คลาสสำหรับการคัดลอกและบีบอัดโฟลเดอร์รูปภาพ""" 
 
-    def __init__(self, pic_storage_domain): 
+    def __init__(self, pic_storage_domain, source_base_file=None):  # {New}
         
         
 
         # --- Configuration ---
-        domain_check = pic_storage_domain[7:11].lower()  # ดึง 3 ตัวอักษรแรกออกมาเช็ค (และใช้ .lower() กันเรื่องตัวพิมพ์ใหญ่)
+        domain_check = pic_storage_domain[7:11].lower()  
         if "opi" in domain_check:
 
             if pic_storage_domain[58] == "/":
@@ -32,7 +38,10 @@ class ImagePacker:
             raise ValueError("Wrong path")  # Raise an error if the prefix is neither "pic" nor "opi"
 
         
-        self.source_base = r"P:\pic.claimdi.com\bike\ImageInspection" 
+        # {New}
+        source_base_file = source_base_file or DEFAULT_SOURCE_BASE_FILE
+        # {New}
+        self.source_base = SpreadsheetConfig(source_base_file).get_pic_drive()
         self.desktop = os.path.join(os.path.expanduser("~"), "Desktop")  # Note : os.path.expanduser("~") คือคำสั่งที่จะคืนค่าเป็น home directory เช่น C:\Users\Zee
                                                                         # Note : พอมี os.path.join มาด้วยก็จะกลายเป็น C:\Users\Zee\Desktop
 

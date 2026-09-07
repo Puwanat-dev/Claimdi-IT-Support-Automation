@@ -25,35 +25,35 @@ class App_UI(tk.Tk): #สือทอดคลาส tk.Tk
     
             if page_name == "home":
                 self.create_home_page()
-            elif page_name == "hello":
-                self.create_hello_page()
+            elif page_name == "zip_complete":
+                self.create_zip_complete_page()
 
     def run_process_flow(self):
          # หากมีการส่งฟังก์ชันจัดการมาจาก main ให้ทำงาน
         if self.on_start_process:
             success = self.on_start_process(self) # ส่ง self ไปเพื่อให้ Input_Window เกาะหน้าต่างหลักได้
             if success:
-                self.show_page("hello") # ทำงานสำเร็จค่อยเปลี่ยนหน้า
+                self.show_page("zip_complete") # ทำงานสำเร็จค่อยเปลี่ยนหน้า
         else:
             print("No action defined!")
 
     
 
     def create_home_page(self):
-                label = tk.Label(self.container, text="Welcome", font=("Arial", 14))
+                label = tk.Label(self.container, text="Claimdi Automate 0.1", font=("Arial", 14))
                 label.pack(pady=(30, 10)) #ย่อมาจาก padding y-axis คือการกำหนด ระยะห่างในแนวตั้ง (บน-ล่าง)
         
-                button = tk.Button(
+                ins_pic_button = tk.Button(
                     self.container,
-                    text="Go to next page",
+                    text="Get Ins Pic",
                     command=self.run_process_flow,  # เรียกใช้ฟังก์ชัน run_process_flow() เมื่อกดปุ่ม
                     width=20,
                     height=2,
                 )
-                button.pack()
+                ins_pic_button.pack()
 
-    def create_hello_page(self):
-        label = tk.Label(self.container, text="Hello cQ", font=("Arial", 16, "bold"))
+    def create_zip_complete_page(self):
+        label = tk.Label(self.container, text="Zip Complete!", font=("Arial", 16, "bold"))
         label.pack(expand=True)
 
         back_button = tk.Button(self.container, text="Back", command=lambda: self.show_page("home"))
