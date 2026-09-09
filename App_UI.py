@@ -2,14 +2,14 @@ import tkinter as tk
 from TestInputClass import TestInputClass
 
 
-class App_UI(tk.Tk): #สือทอดคลาส tk.Tk 
-    def __init__(self, on_start_process = None): #เริ่มต้นสร้างหน้าต่างหลักของแอปพลิเคชัน / on_start_process รับค่า call back
-        super().__init__() #เรียกคุณสมบัติของคลาสแม่ (tk.Tk) มายังคลาสนี้
+class App_UI(tk.Tk): 
+    def __init__(self, image_pack_start_process = None): #เริ่มต้นสร้างหน้าต่างหลักของแอปพลิเคชัน / image_pack_start_process รับค่า call back
+        super().__init__() 
         self.title("Simple Page Switch") 
-        self.geometry("300x200") #.geometry() กำหนดขนาดและตำแหน่ง
+        self.geometry("300x200") 
         self.configure(bg="#f5f5f5")
 
-        self.on_start_process = on_start_process  # เก็บค่า call back
+        self.image_pack_start_process = image_pack_start_process  #Call back
 
         #สร้างคอนเทนเนอร์กลาง สำหรับวางเนื้อหา
         self.container = tk.Frame(self, bg="#f5f5f5")
@@ -25,13 +25,15 @@ class App_UI(tk.Tk): #สือทอดคลาส tk.Tk
     
             if page_name == "home":
                 self.create_home_page()
+            elif page_name == "reply_email":
+                self.create_reply_email_page()
             elif page_name == "zip_complete":
                 self.create_zip_complete_page()
 
-    def run_process_flow(self):
+    def run_image_packer(self):
          # หากมีการส่งฟังก์ชันจัดการมาจาก main ให้ทำงาน
-        if self.on_start_process:
-            success = self.on_start_process(self) # ส่ง self ไปเพื่อให้ Input_Window เกาะหน้าต่างหลักได้
+        if self.image_pack_start_process:
+            success = self.image_pack_start_process(self) # ส่ง self ไปเพื่อให้ Input_Window เกาะหน้าต่างหลักได้
             if success:
                 self.show_page("zip_complete") # ทำงานสำเร็จค่อยเปลี่ยนหน้า
         else:
@@ -42,15 +44,33 @@ class App_UI(tk.Tk): #สือทอดคลาส tk.Tk
     def create_home_page(self):
                 label = tk.Label(self.container, text="Claimdi Automate 0.1", font=("Arial", 14))
                 label.pack(pady=(30, 10)) #ย่อมาจาก padding y-axis คือการกำหนด ระยะห่างในแนวตั้ง (บน-ล่าง)
-        
+
+                reply_email_button = tk.Button(
+                    self.container,
+                    text="Reply Email",
+                    command= lambda: self.show_page("reply_email"),  
+                     width=20,
+                    height=2,
+                )
+                reply_email_button.pack()
+
                 ins_pic_button = tk.Button(
                     self.container,
                     text="Get Ins Pic",
-                    command=self.run_process_flow,  # เรียกใช้ฟังก์ชัน run_process_flow() เมื่อกดปุ่ม
+                    command=self.run_image_packer,  
                     width=20,
                     height=2,
                 )
                 ins_pic_button.pack()
+
+
+    def create_reply_email_page(self):
+            label = tk.Label(self.container, text="Reply Email", font=("Arial", 16, "bold"))
+            label.pack(expand=True)
+    
+            back_button = tk.Button(self.container, text="Back", command=lambda: self.show_page("home"))
+            back_button.pack(pady=10)
+    
 
     def create_zip_complete_page(self):
         label = tk.Label(self.container, text="Zip Complete!", font=("Arial", 16, "bold"))

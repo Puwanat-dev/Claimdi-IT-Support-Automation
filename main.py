@@ -25,5 +25,5 @@ def handle_start_process(app_instance):
 
 if __name__ == "__main__":
     
-    app = App_UI(on_start_process=handle_start_process) 
+    app = App_UI(image_pack_start_process=handle_start_process) 
     app.mainloop()
