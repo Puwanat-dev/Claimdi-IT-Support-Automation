@@ -5,6 +5,8 @@ Backup/
 #Config 
 .venv/
 source_base.xlsx
+mail_patterns.xlsx
+config.txt
 
 #TestFile
 /test_path_ifelse.py

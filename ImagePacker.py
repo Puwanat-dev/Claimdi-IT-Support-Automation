@@ -1,6 +1,7 @@
 import os
 import shutil
 import zipfile
+import pyperclip
 from SpreadsheetConfig import SpreadsheetConfig  # {New}
 
 # {New}
@@ -77,7 +78,8 @@ class ImagePacker:
         print(f"Zip created at: {self.zip_output}") 
 
         # --- Step 3: Remove the unzipped copy (optional) ---
-        shutil.rmtree(self.destination_folder) 
+        shutil.rmtree(self.destination_folder)
+        pyperclip.copy("Test copy") 
         print("Done! Temporary folder removed.")
 
 
