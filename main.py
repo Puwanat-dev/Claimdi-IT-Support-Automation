@@ -1,6 +1,13 @@
 from App_UI import App_UI
 from ImagePacker import ImagePacker
 from Input_Window import Input_Window
+from MailScript import Mail_Answer
+
+
+def handle_mail_reply(app_instance):
+    mail_answer = Mail_Answer()
+    mail_answer.root.mainloop()
+    return True
 
 
 def handle_start_process(app_instance):
@@ -25,5 +32,5 @@ def handle_start_process(app_instance):
 
 if __name__ == "__main__":
     
-    app = App_UI(image_pack_start_process=handle_start_process) 
+    app = App_UI(mail_reply_start_process=handle_mail_reply, image_pack_start_process=handle_start_process)
     app.mainloop()

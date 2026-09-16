@@ -3,13 +3,14 @@ from TestInputClass import TestInputClass
 
 
 class App_UI(tk.Tk): 
-    def __init__(self, image_pack_start_process = None): #เริ่มต้นสร้างหน้าต่างหลักของแอปพลิเคชัน / image_pack_start_process รับค่า call back
+    def __init__(self, mail_reply_start_process = None,image_pack_start_process = None): #เริ่มต้นสร้างหน้าต่างหลักของแอปพลิเคชัน / image_pack_start_process รับค่า call back
         super().__init__() 
         self.title("Simple Page Switch") 
         self.geometry("300x200") 
         self.configure(bg="#f5f5f5")
 
-        self.image_pack_start_process = image_pack_start_process  #Call back
+        self.mail_reply_start_process = mail_reply_start_process  #Mail reply call back
+        self.image_pack_start_process = image_pack_start_process  #Image packer call back
 
         #สร้างคอนเทนเนอร์กลาง สำหรับวางเนื้อหา
         self.container = tk.Frame(self, bg="#f5f5f5")
@@ -30,6 +31,15 @@ class App_UI(tk.Tk):
             elif page_name == "zip_complete":
                 self.create_zip_complete_page()
 
+    def run_mail_reply(self):
+        # หากมีการส่งฟังก์ชันจัดการมาจาก main ให้ทำงาน
+        if self.mail_reply_start_process:
+            success = self.mail_reply_start_process(self) # ส่ง self ไปเพื่อให้ Input_Window เกาะหน้าต่างหลักได้
+            if success:
+                self.show_page("reply_email") # ทำงานสำเร็จค่อยเปลี่ยนหน้า
+        else:
+            print("No action defined!")            
+
     def run_image_packer(self):
          # หากมีการส่งฟังก์ชันจัดการมาจาก main ให้ทำงาน
         if self.image_pack_start_process:
@@ -48,7 +58,7 @@ class App_UI(tk.Tk):
                 reply_email_button = tk.Button(
                     self.container,
                     text="Reply Email",
-                    command= lambda: self.show_page("reply_email"),  
+                    command=self.run_mail_reply,  
                      width=20,
                     height=2,
                 )
