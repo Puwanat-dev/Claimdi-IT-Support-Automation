@@ -52,7 +52,7 @@ class App_UI(tk.Tk):
     
 
     def create_home_page(self):
-                label = tk.Label(self.container, text="Claimdi Automate 0.1", font=("Arial", 14))
+                label = tk.Label(self.container, text="Claimdi Support Beta 1.0", font=("Arial", 14))
                 label.pack(pady=(30, 10)) #ย่อมาจาก padding y-axis คือการกำหนด ระยะห่างในแนวตั้ง (บน-ล่าง)
 
                 reply_email_button = tk.Button(

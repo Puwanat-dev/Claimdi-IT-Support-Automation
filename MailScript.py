@@ -3,6 +3,7 @@ import openpyxl
 import pyperclip
 import tkinter as tk
 from tkinter import messagebox
+from ReadConfig import ReadConfig
 
 class Mail_Answer:
     DEFAULT_PATTERN_FILE = os.path.join(
@@ -16,7 +17,12 @@ class Mail_Answer:
         self.root.geometry("900x620")
         self.root.configure(bg="#f5f5f5")
 
+        #set variable for mail patterns and config
         self.mail_patterns = []
+        self.config = ReadConfig("config.txt")
+        self.it_support_name = self.config.read_variable("it_support_name")
+        self.it_support_phone = self.config.read_variable("it_support_phone")
+       
         self.status_var = tk.StringVar(value="No text appended")
 
         # Read column data
@@ -70,7 +76,13 @@ class Mail_Answer:
         copy_button = tk.Button(
             parent,
             text="Copy to Clipboard",
-            command=lambda: self.copy_to_clipboard("\n".join(self.mail_patterns)),
+
+
+            command=lambda: 
+
+            #Mail script format
+            self.copy_to_clipboard(f"เรียน {self.mail_patterns[0]} \n\n{self.mail_patterns[1]} \n\nBest Regards,\n{self.it_support_name}\nIT Support\nAnywhere 2 go Co.,Ltd.\n520 Dindaeng Rd., Bangkok 10400, Thailand\nTel: {self.it_support_phone}"),
+
             width=20,
             height=2,
             bg="#f0f0f0",
@@ -243,7 +255,7 @@ class Mail_Answer:
                 scrollable_frame,
                 text=pattern,
                 command=lambda p=pattern: (self.mail_patterns.append(p), self.update_status()),
-                width=35,
+                width=50,
                 height=2,
                 bg="#f0f0f0",
                 relief="raised",
