@@ -3,7 +3,7 @@ import openpyxl
 import pyperclip
 import tkinter as tk
 from tkinter import messagebox
-from ReadConfig import ReadConfig
+from read_config import ReadConfig
 
 class Mail_Answer:
     DEFAULT_PATTERN_FILE = os.path.join(
@@ -157,7 +157,7 @@ class Mail_Answer:
         frame_canvas.pack(fill="both", expand=True)
 
         canvas = tk.Canvas(frame_canvas, bg="#f5f5f5")
-        scrollbar = tk.Scrollbar(frame_canvas, orient="vertical", command=canvas.yview)
+        scrollbar = tk.Scrollbar(frame_canvas, orient="vertical", command=canvas.yview , width=30)
         scrollable_frame = tk.Frame(canvas, bg="#f5f5f5")
 
         scrollable_frame.bind(
@@ -239,7 +239,7 @@ class Mail_Answer:
         frame_canvas.pack(fill="both", expand=True)
 
         canvas = tk.Canvas(frame_canvas, bg="#f5f5f5")
-        scrollbar = tk.Scrollbar(frame_canvas, orient="vertical", command=canvas.yview)
+        scrollbar = tk.Scrollbar(frame_canvas, orient="vertical", command=canvas.yview, width=30)
         scrollable_frame = tk.Frame(canvas, bg="#f5f5f5")
 
         scrollable_frame.bind(

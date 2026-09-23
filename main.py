@@ -1,7 +1,7 @@
-from App_UI import App_UI
-from ImagePacker import ImagePacker
-from Input_Window import Input_Window
-from MailScript import Mail_Answer
+from app_ui import App_UI
+from image_packer import ImagePacker
+from input_window import Input_Window
+from mail_script import Mail_Answer
 
 
 def handle_mail_reply(app_instance):

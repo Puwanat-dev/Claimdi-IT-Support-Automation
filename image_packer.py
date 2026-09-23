@@ -2,18 +2,19 @@ import os
 import shutil
 import zipfile
 import pyperclip
-from SpreadsheetConfig import SpreadsheetConfig  # {New}
+from read_config import ReadConfig
+from SpreadsheetConfig import SpreadsheetConfig  
 
 # {New}
 DEFAULT_SOURCE_BASE_FILE = os.path.join(
     os.path.dirname(os.path.abspath(__file__)), "source_base.xlsx"
 )
 
-# --- Class definition --- (ใหม่)
+# --- Class definition --- 
 class ImagePacker: 
     """คลาสสำหรับการคัดลอกและบีบอัดโฟลเดอร์รูปภาพ""" 
 
-    def __init__(self, pic_storage_domain, source_base_file=None):  # {New}
+    def __init__(self, pic_storage_domain, source_base_file=None):  
         
         
 
@@ -37,6 +38,10 @@ class ImagePacker:
             
         else:
             raise ValueError("Wrong path")  # Raise an error if the prefix is neither "pic" nor "opi"
+        
+        self.config = ReadConfig("config.txt")
+        self.it_support_name = self.config.read_variable("it_support_name")
+        self.it_support_phone = self.config.read_variable("it_support_phone")
 
         
         # {New}
@@ -79,7 +84,7 @@ class ImagePacker:
 
         # --- Step 3: Remove the unzipped copy (optional) ---
         shutil.rmtree(self.destination_folder)
-        pyperclip.copy("Test copy") 
+        pyperclip.copy(f"เรียน ทีมตรวจสภาพ \n\nขอนำส่งข้อมูลไฟล์รูปภาพงานตรวจสภาพรายละเอียดตามไฟล์แนบ \nรบกวนตรวจสอบอีกครั้งว่าตรงตามที่ทางลูกค้ารีเควสหรือไม่ ขอบคุณครับ \n\nBest Regards,\n{self.it_support_name}\nIT Support\nAnywhere 2 go Co.,Ltd.\n520 Dindaeng Rd., Bangkok 10400, Thailand\nTel: {self.it_support_phone}") 
         print("Done! Temporary folder removed.")
 
 
