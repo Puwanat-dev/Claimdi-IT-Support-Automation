@@ -2,13 +2,14 @@ import tkinter as tk
 from test_input_class import TestInputClass
 
 
-class App_UI(tk.Tk): 
-    def __init__(self, mail_reply_start_process = None,image_pack_start_process = None): #เริ่มต้นสร้างหน้าต่างหลักของแอปพลิเคชัน / image_pack_start_process รับค่า call back
+class AppUI(tk.Tk): 
+    def __init__(self,text_reply_start_process = None, mail_reply_start_process = None, image_pack_start_process = None): #เริ่มต้นสร้างหน้าต่างหลักของแอปพลิเคชัน / image_pack_start_process รับค่า call back
         super().__init__() 
         self.title("Simple Page Switch") 
         self.geometry("300x200") 
         self.configure(bg="#f5f5f5")
 
+        self.text_reply_start_process = text_reply_start_process  #Text reply call back
         self.mail_reply_start_process = mail_reply_start_process  #Mail reply call back
         self.image_pack_start_process = image_pack_start_process  #Image packer call back
 
@@ -27,10 +28,22 @@ class App_UI(tk.Tk):
     
             if page_name == "home":
                 self.create_home_page()
+            elif page_name == "text_reply":
+                self.create_text_reply_page()
             elif page_name == "reply_email":
                 self.create_reply_email_page()
             elif page_name == "zip_complete":
                 self.create_zip_complete_page()
+
+
+    def run_text_reply(self):
+            # หากมีการส่งฟังก์ชันจัดการมาจาก main ให้ทำงาน
+            if self.text_reply_start_process:
+                success = self.text_reply_start_process(self) # ส่ง self ไปเพื่อให้ Input_Window เกาะหน้าต่างหลักได้
+                if success:
+                    self.show_page("text_reply") # ทำงานสำเร็จค่อยเปลี่ยนหน้า
+            else:
+                print("No action defined!") 
 
     def run_mail_reply(self):
         # หากมีการส่งฟังก์ชันจัดการมาจาก main ให้ทำงาน
@@ -53,8 +66,17 @@ class App_UI(tk.Tk):
     
 
     def create_home_page(self):
-                label = tk.Label(self.container, text="Claimdi Support Beta 1.0", font=("Arial", 14))
+                label = tk.Label(self.container, text="Claimdi Support 1.1", font=("Arial", 14))
                 label.pack(pady=(30, 10)) #ย่อมาจาก padding y-axis คือการกำหนด ระยะห่างในแนวตั้ง (บน-ล่าง)
+
+                text_reply_button = tk.Button(
+                    self.container,
+                    text="Text Reply",
+                    command=self.run_text_reply,  
+                    width=20,
+                    height=2,
+                )
+                text_reply_button.pack()
 
                 reply_email_button = tk.Button(
                     self.container,
@@ -74,6 +96,13 @@ class App_UI(tk.Tk):
                 )
                 ins_pic_button.pack()
 
+    def create_text_reply_page(self):
+        label = tk.Label(self.container, text="Text Reply", font=("Arial", 16, "bold"))
+        label.pack(expand=True)
+
+        back_button = tk.Button(self.container, text="Back", command=lambda: self.show_page("home"))
+        back_button.pack(pady=10)
+
 
     def create_reply_email_page(self):
             label = tk.Label(self.container, text="Reply Email", font=("Arial", 16, "bold"))
@@ -92,5 +121,5 @@ class App_UI(tk.Tk):
 
 
 if __name__ == "__main__":
-    app = App_UI()
+    app = AppUI()
     app.mainloop()

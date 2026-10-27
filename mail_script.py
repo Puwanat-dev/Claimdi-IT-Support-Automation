@@ -5,7 +5,7 @@ import tkinter as tk
 from tkinter import messagebox
 from read_config import ReadConfig
 
-class Mail_Answer:
+class MailScript:
     DEFAULT_PATTERN_FILE = os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "mail_patterns.xlsx" #file name
     )
@@ -292,5 +292,5 @@ class Mail_Answer:
 
 
 if __name__ == "__main__":
-    app = Mail_Answer()
+    app = MailScript()
     app.run()
