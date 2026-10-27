@@ -1,0 +1,14 @@
+
+__pycache__/
+Backup/
+
+#Config 
+.venv/
+source_base.xlsx
+mail_patterns.xlsx
+config.txt
+
+#TestFile
+/test_path_ifelse.py
+/test_path_name.py
+/test_input_class.py
