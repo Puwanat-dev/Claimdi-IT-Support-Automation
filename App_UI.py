@@ -1,5 +1,5 @@
 import tkinter as tk
-from TestInputClass import TestInputClass
+from test_input_class import TestInputClass
 
 
 class App_UI(tk.Tk): 
@@ -20,7 +20,8 @@ class App_UI(tk.Tk):
         self.show_page("home")
 
 
-    def show_page(self, page_name): #ลบ widget เก่า แล้วสร้างอันใหม่
+    def show_page(self, page_name): 
+            #ลบ widget เก่า แล้วสร้างอันใหม่
             for widget in self.container.winfo_children(): #.winfo_children() คืนค่าลิสต์ของวิดเจ็ตทั้งหมดที่อยู่ในคอนเทนเนอร์
                 widget.destroy()
     

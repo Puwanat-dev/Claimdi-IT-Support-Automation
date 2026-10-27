@@ -3,7 +3,7 @@ import shutil
 import zipfile
 import pyperclip
 from read_config import ReadConfig
-from SpreadsheetConfig import SpreadsheetConfig  
+from spread_sheet_config import SpreadsheetConfig  
 
 # {New}
 DEFAULT_SOURCE_BASE_FILE = os.path.join(

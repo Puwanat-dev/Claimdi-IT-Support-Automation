@@ -23,7 +23,7 @@ class Mail_Answer:
         self.it_support_name = self.config.read_variable("it_support_name")
         self.it_support_phone = self.config.read_variable("it_support_phone")
        
-        self.status_var = tk.StringVar(value="No text appended")
+        self.status_var = tk.StringVar(master=self.root, value="No text appended")
 
         # Read column data
         self.A_patterns = self.read_Column_A()
@@ -40,6 +40,7 @@ class Mail_Answer:
         action_row.pack(fill="x")
         self.create_copy_buttons(action_row)
         self.create_reset_button(action_row)
+        self.create_close_button(action_row)
 
         status_bar = tk.Label(
             top_frame,
@@ -103,6 +104,19 @@ class Mail_Answer:
             cursor="hand2",
         )
         reset_button.pack(side="left", pady=5)
+
+    def create_close_button(self, parent):
+        close_button = tk.Button(
+            parent,
+            text="Close",
+            command=self.root.destroy,
+            width=15,
+            height=2,
+            bg="#f0f0f0",
+            relief="raised",
+            cursor="hand2",
+        )
+        close_button.pack(side="left", pady=5)
 
 
     def read_Column_A(self):
