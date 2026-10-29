@@ -1,17 +1,17 @@
 import tkinter as tk
-from test_input_class import TestInputClass
 
 
 class AppUI(tk.Tk): 
-    def __init__(self,text_reply_start_process = None, mail_reply_start_process = None, image_pack_start_process = None): #เริ่มต้นสร้างหน้าต่างหลักของแอปพลิเคชัน / image_pack_start_process รับค่า call back
+    def __init__(self,text_reply_start_process = None, mail_reply_start_process = None, image_pack_start_process = None, policy_ui_start_process = None): #เริ่มต้นสร้างหน้าต่างหลักของแอปพลิเคชัน / image_pack_start_process รับค่า call back
         super().__init__() 
         self.title("Simple Page Switch") 
-        self.geometry("300x200") 
+        self.geometry("300x250") 
         self.configure(bg="#f5f5f5")
 
         self.text_reply_start_process = text_reply_start_process  #Text reply call back
         self.mail_reply_start_process = mail_reply_start_process  #Mail reply call back
         self.image_pack_start_process = image_pack_start_process  #Image packer call back
+        self.policy_ui_start_process = policy_ui_start_process  #Policy UI call back
 
         #สร้างคอนเทนเนอร์กลาง สำหรับวางเนื้อหา
         self.container = tk.Frame(self, bg="#f5f5f5")
@@ -34,6 +34,8 @@ class AppUI(tk.Tk):
                 self.create_reply_email_page()
             elif page_name == "zip_complete":
                 self.create_zip_complete_page()
+            elif page_name == "policy_ui_home":
+                self.create_policy_ui_home_page()
 
 
     def run_text_reply(self):
@@ -60,6 +62,14 @@ class AppUI(tk.Tk):
             success = self.image_pack_start_process(self) # ส่ง self ไปเพื่อให้ Input_Window เกาะหน้าต่างหลักได้
             if success:
                 self.show_page("zip_complete") # ทำงานสำเร็จค่อยเปลี่ยนหน้า
+        else:
+            print("No action defined!")
+
+    def open_policy_ui(self):   
+        if self.policy_ui_start_process:
+            success = self.policy_ui_start_process(self) # ส่ง self ไปเพื่อให้ Input_Window เกาะหน้าต่างหลักได้
+            if success:
+                self.show_page("policy_ui_home") # ทำงานสำเร็จค่อยเปลี่ยนหน้า
         else:
             print("No action defined!")
 
@@ -96,6 +106,15 @@ class AppUI(tk.Tk):
                 )
                 ins_pic_button.pack()
 
+                policy_ui_button = tk.Button(
+                    self.container,
+                    text="Policy Moving",
+                    command=self.open_policy_ui,
+                    width=20,
+                    height=2,
+                )
+                policy_ui_button.pack()
+
     def create_text_reply_page(self):
         label = tk.Label(self.container, text="Text Reply", font=("Arial", 16, "bold"))
         label.pack(expand=True)
@@ -113,10 +132,17 @@ class AppUI(tk.Tk):
     
 
     def create_zip_complete_page(self):
-        label = tk.Label(self.container, text="Zip Complete!", font=("Arial", 16, "bold"))
-        label.pack(expand=True)
+            label = tk.Label(self.container, text="Zip Complete!", font=("Arial", 16, "bold"))
+            label.pack(expand=True)
 
-        back_button = tk.Button(self.container, text="Back", command=lambda: self.show_page("home"))
+            back_button = tk.Button(self.container, text="Back", command=lambda: self.show_page("home"))
+            back_button.pack(pady=10)
+
+    def create_policy_ui_home_page(self):
+        label = tk.Label(self.container, text="Policy UI Home", font=("Arial", 16, "bold"))
+        label.pack(expand=True)
+         
+        back_button = tk.Button(self.container, text="Back", command=lambda: self.show_page("policy_ui_home"))
         back_button.pack(pady=10)
 
 

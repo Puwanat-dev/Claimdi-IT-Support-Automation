@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import simpledialog # นำเข้าป๊อปอัปรับค่า
 
-class Input_Window:
+class InputWindow:
     def __init__(self, parent_window = None):
         # สร้าง Dialog เด้งขึ้นมาถามบน GUI แทนการใช้ input()
         self.pic_path = simpledialog.askstring(
@@ -15,5 +15,5 @@ class Input_Window:
             return None
 
 if __name__ == "__main__":
-    printer = Input_Window()
+    printer = InputWindow()
     print(printer.getPath())
